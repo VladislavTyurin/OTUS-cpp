@@ -1,8 +1,9 @@
 language: cpp
-before_script:
+#before_script:
 #- sudo apt-get install libboost-test-dev -y
-- cd Homework2
+#- cd Homework2
 script:
+- cd Homework2
 - cmake .
 - cmake --build .
 #- cmake --build . --target test
