@@ -23,7 +23,7 @@ std::vector<std::string> test_data()
 
     for(auto ip = v.rbegin();ip!=v.rend();++ip)
     {
-        ip_pool.push_back(ip);
+        ip_pool.push_back(ip.split("."));
     }
     return ip_pool;
 }
