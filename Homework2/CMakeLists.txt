@@ -4,7 +4,7 @@ project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 #project(ip_filter VERSION 0.0.0)
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+#find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 configure_file(version.h.in version.h)
 
