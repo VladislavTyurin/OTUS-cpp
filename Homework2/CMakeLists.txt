@@ -2,27 +2,15 @@ cmake_minimum_required(VERSION 3.2)
 
 project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
-#find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-
 configure_file(version.h.in version.h)
 
 add_executable(ip_filter ip_filter.cpp)
-
-#add_executable(test_ip_filter test.cpp)
-
-#add_library(test_data test_data.cpp)
 
 set_target_properties(ip_filter PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
-
-#target_link_libraries(ip_filter test_data)
-
-#target_link_libraries(test_ip_filter
-#        ${Boost_LIBRARIES}
-#        test_data)
 
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
@@ -34,7 +22,3 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 
 include(CPack)
-
-#enable_testing()
-
-#add_test(test_ip test_ip_filter)

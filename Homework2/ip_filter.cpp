@@ -14,9 +14,9 @@
 // ("11.22", '.') -> ["11", "22"]
 
 using VecStr = std::vector<std::string>;
-using TupleIp4 = std::tuple<int,int,int,int>; // Кортеж, содержащий значения Ipv4 адресов
+using VecInt = std::vector<int>;
 
-void filter(const std::vector<VecStr>& ip_pool)
+void filter(const std::vector<VecInt>& ip_pool)
 {
     for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
     {
@@ -32,51 +32,35 @@ void filter(const std::vector<VecStr>& ip_pool)
     }
 }
 
-void filter_any(const std::vector<VecStr>& ip_pool, int ip_byte)
+void filter_any(const std::vector<VecInt>& ip_pool, int ip_byte)
 {
-    for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
+    std::vector<VecInt> ip_pool1;
+    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(ip_pool1),
+    [ip_byte](VecInt vec)
     {
-        if(std::any_of(ip->cbegin(),ip->cend(),[&ip_byte](std::string s){return std::stoi(s) == ip_byte;}))
-        {
-            for (auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part) {
-                if (ip_part != ip->cbegin()) {
-                    std::cout << ".";
-                }
-                std::cout << *ip_part;
-            }
-            std::cout << std::endl;
-        }
-    }
+        return std::any_of(vec.cbegin(),vec.cend(),[&ip_byte](int num){return num == ip_byte;});
+    });
+
+    filter(ip_pool1);
 }
 
 template <typename... Args>
-void filter(const std::vector<VecStr >& ip_pool,Args... args)
+void filter(const std::vector<VecInt >& ip_pool,Args... args)
 {
     const int n = sizeof...(args);
-    int index = 0;
-    std::vector<int> v = {args...};
-    for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
+    VecInt v = {args...};
+    std::vector<VecInt> ip_pool1;
+    std::copy_if(ip_pool.begin(),ip_pool.end(),std::back_inserter(ip_pool1),[&v](VecInt vec)
     {
-        index = 0;
-        std::string ip_address;
-        for(auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
+        bool result=0;
+        for(int i=0;i<n;++i)
         {
-            if(index < n && stoi(*ip_part)!= v[index])
-            {
-                ip_address.clear();
-                break;
-            }
-            if (ip_part != ip->cbegin())
-            {
-                ip_address+= ".";
-            }
-
-            ip_address+= *ip_part;
-            ++index;
+            result^=v[i]^vec[i];
         }
-        if(!ip_address.empty())
-            std::cout<<ip_address<<std::endl;
-    }
+        return !result;
+    });
+
+    filter(ip_pool1);
 };
 
 VecStr split(const std::string &str, char d)
@@ -98,28 +82,26 @@ VecStr split(const std::string &str, char d)
     return r;
 }
 
-inline TupleIp4 make_ip_tuple(const VecStr& ip)
+inline VecInt IntIpAddress(const VecStr& ipStr)
 {
-    return std::make_tuple(std::stoi(ip[0]),std::stoi(ip[1]),std::stoi(ip[2]),std::stoi(ip[3]));
+    VecInt r = {stoi(ipStr[0]),stoi(ipStr[1]),stoi(ipStr[2]),stoi(ipStr[3])};
+    return r;
 }
 
 int main(int argc, char const *argv[])
 {
     try
     {
-        std::vector<VecStr > ip_pool;
+        std::vector<VecInt > ip_pool;
         for(std::string line; std::getline(std::cin, line);)
         {
             VecStr v = split(line, '\t');
-            ip_pool.push_back(split(v.at(0), '.'));
+            ip_pool.push_back(IntIpAddress(split(v.at(0), '.')));
         }
 
         // TODO reverse lexicographically sort
         //reverse lexicographically sort
-        std::sort(ip_pool.begin(),ip_pool.end(),[](const VecStr & ip1, const VecStr & ip2)
-        {
-            return make_ip_tuple(ip2)<make_ip_tuple(ip1);
-        });
+        std::sort(ip_pool.begin(),ip_pool.end(),std::greater<VecInt>());
 
         filter(ip_pool);
         filter(ip_pool,1);
