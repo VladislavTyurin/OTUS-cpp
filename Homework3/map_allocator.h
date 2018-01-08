@@ -6,7 +6,10 @@ template<typename T, uint num_elems>
 class map_allocator {
 public:
     using value_type = T;
-
+    using pointer = T*;
+    using const_pointer = const pointer;
+    using reference = T&;
+    using const_reference = const reference;
     template<typename U>
     struct rebind
     {
@@ -53,7 +56,7 @@ public:
     void construct(U* p, Args&&... args)
     {
         new((void*)p) U(std::forward<Args...>(args...));
-    };
+    }
 
     template<typename U>
     void destroy(U* p)
