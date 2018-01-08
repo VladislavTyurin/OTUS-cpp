@@ -3,7 +3,7 @@ language: cpp
 #- sudo apt-get install libboost-test-dev -y
 #- cd Homework2
 script:
-- cd Homework2
+- cd Homework3
 - cmake .
 - cmake --build .
 #- cmake --build . --target test
@@ -12,4 +12,4 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - curl -T ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uVladislavTyurin:$BINTRAY_API_KEY "https://api.bintray.com/content/vladislavtyurin/otus-cpp/ip_filter/$TRAVIS_BUILD_NUMBER/ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -T allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uVladislavTyurin:$BINTRAY_API_KEY "https://api.bintray.com/content/vladislavtyurin/otus-cpp/allocator/$TRAVIS_BUILD_NUMBER/allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
