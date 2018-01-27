@@ -10,24 +10,42 @@
 
 
 /*!
-Копирует содержимое из исходной области памяти в целевую область память
+Печатает элементы ip адреса
 \param[in] T&& Объект, который нужно распечатать
 \param[in] index Число, указывающее, стоит ли этот элемент в начале адреса или нет
 */
-template <typename T>
-void printer(T&& t, int index)
+struct printer
 {
-    if(index==0)
+    template <typename T>
+    void operator()(T&& t, int index)
     {
-        std::cout<<t;
-        return;
+        if(index==0)
+        {
+            std::cout<<t;
+            return;
+        }
+        std::cout<<"."<<t;
     }
-    std::cout<<"."<<t;
-}
+};
+//template <typename T>
+//void printer(T&& t, int index)
+//{
+//    if(index==0)
+//    {
+//        std::cout<<t;
+//        return;
+//    }
+//    std::cout<<"."<<t;
+//}
 
-//Печать целочисленных типов
-template <typename T>
-void print(T t, int)
+/*!
+Обработка целочисленных типов
+\param[in] T&& Объект, который нужно обработать
+\param[in] int  - целочисленный тип
+ */
+
+template <typename T, typename Printer>
+void print(T&& t, Printer printer, int)
 {
     auto p = std::bitset<8*sizeof(t)>(t).to_string();
     for(int i=0;i<sizeof(t);++i)
@@ -37,9 +55,13 @@ void print(T t, int)
     std::cout<<std::endl;
 }
 
-//Печать контейнеров
-template <typename T>
-void print(T t,char)
+/*!
+Обработка контейнерных типов
+\param[in] T&& Объект, который нужно обработать
+\param[in] char  - контейнерный тип
+ */
+template <typename T, typename Printer>
+void print(T&& t, Printer printer, char)
 {
     auto start = t.cbegin();
     auto end = t.cend();
@@ -51,25 +73,36 @@ void print(T t,char)
     std::cout<<std::endl;
 }
 
-//Печать строки
-void print(std::string t, char)
+/*!
+Обработка строк
+\param[in] std::string строка, которую нужно обработать
+\param[in] int  - char  - контейнерный тип
+ */
+template <typename Printer>
+void print(std::string t, Printer, char)
 {
     std::cout<<t<<std::endl;
 }
 
+/*!
+Отделяет контейнеры от целочисленных типов
+\param[in] T&& Объект, который нужно обработать
+ */
 template <typename T>
-void print_ip(T t)
+void print_ip(T&& t)
 {
-    print(t,is_container<T>::value);
+    print(t,printer(),is_container<T>::value);
 }
 
-//Отдельная специализация для кортежа
+/*!
+Отдельная специализация для кортежа
+ */
 template <typename... Args>
 void print_ip(std::tuple<Args...> t)
 {
     //Рекурсия: прямой проход - проверка типов
     //обратный проход - печать элементов
-    for_each(t,callback());
+    print_tuple(t,printer());
 };
 
 int main()
