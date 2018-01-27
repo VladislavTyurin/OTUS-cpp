@@ -5,6 +5,7 @@ script:
 - cmake --build .
 #- cmake --build . --target test
 - cmake --build . --target package
+- doxygen $TRAVIS_BUILD_DIR/Doxyfile
 deploy:
   provider: script
   skip_cleanup: true

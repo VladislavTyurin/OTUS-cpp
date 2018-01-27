@@ -8,7 +8,12 @@
 #include "check_type.h"
 #include "print_tuple.h"
 
-//Функция печати
+
+/*!
+Копирует содержимое из исходной области памяти в целевую область память
+\param[in] T&& Объект, который нужно распечатать
+\param[in] index Число, указывающее, стоит ли этот элемент в начале адреса или нет
+*/
 template <typename T>
 void printer(T&& t, int index)
 {
