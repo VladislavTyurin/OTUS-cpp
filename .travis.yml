@@ -7,7 +7,7 @@ script:
 - cmake --build .
 #- cmake --build . --target test
 - cmake --build . --target package
-- doxygen -s $TRAVIS_BUILD_DIR/Doxyfile
+- doxygen -g $TRAVIS_BUILD_DIR/Doxyfile
 #- doxygen $TRAVIS_BUILD_DIR/Doxyfile
 deploy:
   provider: pages
