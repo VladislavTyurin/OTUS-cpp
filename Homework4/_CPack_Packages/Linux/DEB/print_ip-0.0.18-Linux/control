@@ -1,0 +1,9 @@
+Package: print_ip
+Version: 0.0.18
+Section: devel
+Priority: optional
+Architecture: amd64
+Installed-Size: 80
+Maintainer: vst123@yandex.ru
+Description: print_ip built using CMake
+
