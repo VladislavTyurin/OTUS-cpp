@@ -1,6 +1,4 @@
 language: cpp
-before_script:
--apt-get install doxygen
 script:
 - cd Homework4
 - cmake .
