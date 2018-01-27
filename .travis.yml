@@ -1,6 +1,6 @@
 language: cpp
 before_script:
--apt-get install doxyge
+-apt-get install doxygen
 script:
 - cd Homework4
 - cmake .
@@ -10,9 +10,9 @@ script:
 - doxygen $TRAVIS_BUILD_DIR/Doxyfile
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep_history: true
   on:
     branch: master
   provider: script
