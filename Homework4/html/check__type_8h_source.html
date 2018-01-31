@@ -93,20 +93,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="classis__container.html">is_container</a>(<span class="keyword">const</span> <a class="code" href="classis__container.html">is_container</a>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">char</span> has_iterator(<span class="keyword">typename</span> C::iterator*)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> has_iterator(<span class="keyword">typename</span> C::iterator*)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordflow">return</span> char();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">int</span> has_iterator(...)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> has_iterator(...)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> int();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classis__container.html#ac4653fd3cc2c8268f003fbe2d878d48e">   21</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">auto</span> <a class="code" href="classis__container.html#ac4653fd3cc2c8268f003fbe2d878d48e">value</a> = has_iterator&lt;T&gt;(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classis__container.html#abe72bf896680aa10340ccf08a5d293c7">   21</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> <a class="code" href="classis__container.html#abe72bf896680aa10340ccf08a5d293c7">value</a> = has_iterator&lt;T&gt;(<span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="ttc" id="classis__container_html_abe72bf896680aa10340ccf08a5d293c7"><div class="ttname"><a href="classis__container.html#abe72bf896680aa10340ccf08a5d293c7">is_container::value</a></div><div class="ttdeci">static constexpr bool value</div><div class="ttdef"><b>Definition:</b> check_type.h:21</div></div>
 <div class="ttc" id="classis__container_html"><div class="ttname"><a href="classis__container.html">is_container</a></div><div class="ttdef"><b>Definition:</b> check_type.h:4</div></div>
-<div class="ttc" id="classis__container_html_ac4653fd3cc2c8268f003fbe2d878d48e"><div class="ttname"><a href="classis__container.html#ac4653fd3cc2c8268f003fbe2d878d48e">is_container::value</a></div><div class="ttdeci">static constexpr auto value</div><div class="ttdef"><b>Definition:</b> check_type.h:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

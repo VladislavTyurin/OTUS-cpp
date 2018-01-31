@@ -7,8 +7,8 @@
 
 var indexSectionsWithContent =
 {
-  0: "cimnopv",
-  1: "ip",
+  0: "cimnoptv",
+  1: "it",
   2: "cmpv",
   3: "mnop",
   4: "v",

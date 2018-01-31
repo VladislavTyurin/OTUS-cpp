@@ -8,15 +8,15 @@ private:
     is_container(const is_container&) = delete;
 
     template<typename C>
-    static constexpr char has_iterator(typename C::iterator*)
+    static constexpr bool has_iterator(typename C::iterator*)
     {
-        return char();
+        return true;
     }
     template<typename C>
-    static constexpr int has_iterator(...)
+    static constexpr bool has_iterator(...)
     {
-        return int();
+        return false;
     }
 public:
-    static constexpr auto value = has_iterator<T>(nullptr);
+    static constexpr bool value = has_iterator<T>(nullptr);
 };

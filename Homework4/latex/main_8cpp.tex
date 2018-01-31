@@ -21,18 +21,12 @@ Include dependency graph for main.\-cpp\-:
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structprinter}{printer}
+struct \hyperlink{structt__printer}{t\-\_\-printer}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T , typename Printer $>$ }\\void \hyperlink{main_8cpp_a2e507a49231a92dd51a74153d941a10b}{print} (T \&\&t, Printer \hyperlink{structprinter}{printer}, int)
-\item 
-{\footnotesize template$<$typename T , typename Printer $>$ }\\void \hyperlink{main_8cpp_a4d92f34c852cf08c698ce9ff9b8f40e1}{print} (T \&\&t, Printer \hyperlink{structprinter}{printer}, char)
-\item 
-{\footnotesize template$<$typename Printer $>$ }\\void \hyperlink{main_8cpp_a650caaec23d14a266eb863256c192da2}{print} (std\-::string t, Printer, char)
-\item 
-{\footnotesize template$<$typename T $>$ }\\void \hyperlink{main_8cpp_a5a2ed2f3cccd43a84bfd7d2740475be1}{print\-\_\-ip} (T \&\&t)
+{\footnotesize template$<$typename T , typename std\-::enable\-\_\-if$<$ std\-::is\-\_\-integral$<$ T $>$\-::value, T $\ast$ $>$\-::type  = nullptr$>$ }\\void \hyperlink{main_8cpp_a5fdf62cd03a50151ca9450b2ee25d30e}{print\-\_\-ip} (T \&\&t)
 \item 
 {\footnotesize template$<$typename... Args$>$ }\\void \hyperlink{main_8cpp_adf6cb0a6bc6c2be1c8468b73110978ba}{print\-\_\-ip} (std\-::tuple$<$ Args...$>$ t)
 \item 
@@ -48,67 +42,23 @@ int \hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 {}
 \end{DoxyParamCaption}
 )}}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
-\hypertarget{main_8cpp_a2e507a49231a92dd51a74153d941a10b}{\index{main.\-cpp@{main.\-cpp}!print@{print}}
-\index{print@{print}!main.cpp@{main.\-cpp}}
-\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename Printer $>$ void print (
+\hypertarget{main_8cpp_a5fdf62cd03a50151ca9450b2ee25d30e}{\index{main.\-cpp@{main.\-cpp}!print\-\_\-ip@{print\-\_\-ip}}
+\index{print\-\_\-ip@{print\-\_\-ip}!main.cpp@{main.\-cpp}}
+\subsubsection[{print\-\_\-ip}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename std\-::enable\-\_\-if$<$ std\-::is\-\_\-integral$<$ T $>$\-::value, T $\ast$ $>$\-::type  = nullptr$>$ void print\-\_\-ip (
 \begin{DoxyParamCaption}
-\item[{T \&\&}]{t, }
-\item[{Printer}]{printer, }
-\item[{int}]{}
+\item[{T \&\&}]{t}
 \end{DoxyParamCaption}
-)}}\label{main_8cpp_a2e507a49231a92dd51a74153d941a10b}
-Обработка целочисленных типов 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em T\&\&} & Объект, который нужно обработать \\
-\hline
-\mbox{\tt in}  & {\em int} & -\/ целочисленный тип \\
-\hline
-\end{DoxyParams}
-\hypertarget{main_8cpp_a4d92f34c852cf08c698ce9ff9b8f40e1}{\index{main.\-cpp@{main.\-cpp}!print@{print}}
-\index{print@{print}!main.cpp@{main.\-cpp}}
-\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename Printer $>$ void print (
-\begin{DoxyParamCaption}
-\item[{T \&\&}]{t, }
-\item[{Printer}]{printer, }
-\item[{char}]{}
-\end{DoxyParamCaption}
-)}}\label{main_8cpp_a4d92f34c852cf08c698ce9ff9b8f40e1}
+)}}\label{main_8cpp_a5fdf62cd03a50151ca9450b2ee25d30e}
+Обработка целочисленных типов
+
 Обработка контейнерных типов 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em T\&\&} & Объект, который нужно обработать \\
 \hline
-\mbox{\tt in}  & {\em char} & -\/ контейнерный тип \\
+\mbox{\tt in}  & {\em char} & -\/ контейнерный тип\\
 \hline
 \end{DoxyParams}
-\hypertarget{main_8cpp_a650caaec23d14a266eb863256c192da2}{\index{main.\-cpp@{main.\-cpp}!print@{print}}
-\index{print@{print}!main.cpp@{main.\-cpp}}
-\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Printer $>$ void print (
-\begin{DoxyParamCaption}
-\item[{std\-::string}]{t, }
-\item[{Printer}]{, }
-\item[{char}]{}
-\end{DoxyParamCaption}
-)}}\label{main_8cpp_a650caaec23d14a266eb863256c192da2}
-Обработка строк 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em std\-::string} & строка, которую нужно обработать \\
-\hline
-\mbox{\tt in}  & {\em int} & -\/ char -\/ контейнерный тип \\
-\hline
-\end{DoxyParams}
-\hypertarget{main_8cpp_a5a2ed2f3cccd43a84bfd7d2740475be1}{\index{main.\-cpp@{main.\-cpp}!print\-\_\-ip@{print\-\_\-ip}}
-\index{print\-\_\-ip@{print\-\_\-ip}!main.cpp@{main.\-cpp}}
-\subsubsection[{print\-\_\-ip}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void print\-\_\-ip (
-\begin{DoxyParamCaption}
-\item[{T \&\&}]{t}
-\end{DoxyParamCaption}
-)}}\label{main_8cpp_a5a2ed2f3cccd43a84bfd7d2740475be1}
-Отделяет контейнеры от целочисленных типов 
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em T\&\&} & Объект, который нужно обработать \\
-\hline
-\end{DoxyParams}
-\hypertarget{main_8cpp_adf6cb0a6bc6c2be1c8468b73110978ba}{\index{main.\-cpp@{main.\-cpp}!print\-\_\-ip@{print\-\_\-ip}}
+Обработка строк \hypertarget{main_8cpp_adf6cb0a6bc6c2be1c8468b73110978ba}{\index{main.\-cpp@{main.\-cpp}!print\-\_\-ip@{print\-\_\-ip}}
 \index{print\-\_\-ip@{print\-\_\-ip}!main.cpp@{main.\-cpp}}
 \subsubsection[{print\-\_\-ip}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void print\-\_\-ip (
 \begin{DoxyParamCaption}

@@ -105,23 +105,14 @@ Include dependency graph for main.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprinter.html">printer</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__printer.html">t_printer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2e507a49231a92dd51a74153d941a10b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Printer &gt; </td></tr>
-<tr class="memitem:a2e507a49231a92dd51a74153d941a10b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a2e507a49231a92dd51a74153d941a10b">print</a> (T &amp;&amp;t, Printer <a class="el" href="structprinter.html">printer</a>, int)</td></tr>
-<tr class="separator:a2e507a49231a92dd51a74153d941a10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d92f34c852cf08c698ce9ff9b8f40e1"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Printer &gt; </td></tr>
-<tr class="memitem:a4d92f34c852cf08c698ce9ff9b8f40e1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4d92f34c852cf08c698ce9ff9b8f40e1">print</a> (T &amp;&amp;t, Printer <a class="el" href="structprinter.html">printer</a>, char)</td></tr>
-<tr class="separator:a4d92f34c852cf08c698ce9ff9b8f40e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a650caaec23d14a266eb863256c192da2"><td class="memTemplParams" colspan="2">template&lt;typename Printer &gt; </td></tr>
-<tr class="memitem:a650caaec23d14a266eb863256c192da2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a650caaec23d14a266eb863256c192da2">print</a> (std::string t, Printer, char)</td></tr>
-<tr class="separator:a650caaec23d14a266eb863256c192da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a2ed2f3cccd43a84bfd7d2740475be1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5a2ed2f3cccd43a84bfd7d2740475be1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a5a2ed2f3cccd43a84bfd7d2740475be1">print_ip</a> (T &amp;&amp;t)</td></tr>
-<tr class="separator:a5a2ed2f3cccd43a84bfd7d2740475be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fdf62cd03a50151ca9450b2ee25d30e"><td class="memTemplParams" colspan="2">template&lt;typename T , typename std::enable_if&lt; std::is_integral&lt; T &gt;::value, T * &gt;::type  = nullptr&gt; </td></tr>
+<tr class="memitem:a5fdf62cd03a50151ca9450b2ee25d30e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a5fdf62cd03a50151ca9450b2ee25d30e">print_ip</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a5fdf62cd03a50151ca9450b2ee25d30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf6cb0a6bc6c2be1c8468b73110978ba"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:adf6cb0a6bc6c2be1c8468b73110978ba"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#adf6cb0a6bc6c2be1c8468b73110978ba">print_ip</a> (std::tuple&lt; Args...&gt; t)</td></tr>
 <tr class="separator:adf6cb0a6bc6c2be1c8468b73110978ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,137 +135,11 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2e507a49231a92dd51a74153d941a10b"></a>
+<a class="anchor" id="a5fdf62cd03a50151ca9450b2ee25d30e"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Printer &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void print </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Printer&#160;</td>
-          <td class="paramname"><em>printer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Обработка целочисленных типов </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">T&amp;&amp;</td><td>Объект, который нужно обработать </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">int</td><td>- целочисленный тип </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a4d92f34c852cf08c698ce9ff9b8f40e1"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Printer &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void print </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Printer&#160;</td>
-          <td class="paramname"><em>printer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Обработка контейнерных типов </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">T&amp;&amp;</td><td>Объект, который нужно обработать </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">char</td><td>- контейнерный тип </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a650caaec23d14a266eb863256c192da2"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Printer &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void print </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Printer&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Обработка строк </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">std::string</td><td>строка, которую нужно обработать </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">int</td><td>- char - контейнерный тип </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a5a2ed2f3cccd43a84bfd7d2740475be1"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename std::enable_if&lt; std::is_integral&lt; T &gt;::value, T * &gt;::type  = nullptr&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void print_ip </td>
@@ -285,13 +150,16 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Отделяет контейнеры от целочисленных типов </p>
+<p>Обработка целочисленных типов</p>
+<p>Обработка контейнерных типов </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">T&amp;&amp;</td><td>Объект, который нужно обработать </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">char</td><td>- контейнерный тип</td></tr>
   </table>
   </dd>
 </dl>
+<p>Обработка строк </p>
 
 </div>
 </div>
