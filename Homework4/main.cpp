@@ -14,7 +14,8 @@
 \param[in] T&& Объект, который нужно распечатать
 \param[in] index Число, указывающее, стоит ли этот элемент в начале адреса или нет
 */
-struct printer
+
+struct t_printer
 {
     template <typename T>
     void operator()(T&& t, int index)
@@ -27,30 +28,18 @@ struct printer
         std::cout<<"."<<t;
     }
 };
-//template <typename T>
-//void printer(T&& t, int index)
-//{
-//    if(index==0)
-//    {
-//        std::cout<<t;
-//        return;
-//    }
-//    std::cout<<"."<<t;
-//}
 
 /*!
 Обработка целочисленных типов
-\param[in] T&& Объект, который нужно обработать
-\param[in] int  - целочисленный тип
  */
-
-template <typename T, typename Printer>
-void print(T&& t, Printer printer, int)
+template <typename T, typename std::enable_if<std::is_integral<T>::value, T*>::type = nullptr>
+void print_ip(T&& t)
 {
+    static t_printer tp;
     auto p = std::bitset<8*sizeof(t)>(t).to_string();
     for(int i=0;i<sizeof(t);++i)
     {
-        printer(std::bitset<8>(p,i*8,8).to_ulong(),i);
+        tp(std::bitset<8>(p,i*8,8).to_ulong(),i);
     }
     std::cout<<std::endl;
 }
@@ -60,38 +49,27 @@ void print(T&& t, Printer printer, int)
 \param[in] T&& Объект, который нужно обработать
 \param[in] char  - контейнерный тип
  */
-template <typename T, typename Printer>
-void print(T&& t, Printer printer, char)
+template <typename T,typename std::enable_if<is_container<T>::value && !std::is_same<T,std::string>::value,T*>::type = nullptr>
+void print_ip(T&& t)
 {
+    static t_printer tp;
     auto start = t.cbegin();
     auto end = t.cend();
     int i=0;
     for(auto&& el:t)
     {
-        printer(el,i++);
+        tp(el,i++);
     }
     std::cout<<std::endl;
 }
 
 /*!
 Обработка строк
-\param[in] std::string строка, которую нужно обработать
-\param[in] int  - char  - контейнерный тип
  */
-template <typename Printer>
-void print(std::string t, Printer, char)
-{
-    std::cout<<t<<std::endl;
-}
-
-/*!
-Отделяет контейнеры от целочисленных типов
-\param[in] T&& Объект, который нужно обработать
- */
-template <typename T>
+template <typename T,typename std::enable_if<std::is_same<T,std::string>::value,T*>::type = nullptr>
 void print_ip(T&& t)
 {
-    print(t,printer(),is_container<T>::value);
+    std::cout<<t<<std::endl;
 }
 
 /*!
@@ -102,7 +80,7 @@ void print_ip(std::tuple<Args...> t)
 {
     //Рекурсия: прямой проход - проверка типов
     //обратный проход - печать элементов
-    print_tuple(t,printer());
+    print_tuple(t,t_printer());
 };
 
 int main()
