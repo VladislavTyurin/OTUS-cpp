@@ -5,7 +5,7 @@ configure_file(version.h.in version.h)
 
 add_executable(homework5 main.cpp document.h shape.h)
 
-set_target_properties(print_ip PROPERTIES
+set_target_properties(homework5 PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
