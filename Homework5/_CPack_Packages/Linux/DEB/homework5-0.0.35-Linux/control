@@ -1,0 +1,9 @@
+Package: homework5
+Version: 0.0.35
+Section: devel
+Priority: optional
+Architecture: amd64
+Installed-Size: 63
+Maintainer: vst123@yandex.ru
+Description: homework5 built using CMake
+

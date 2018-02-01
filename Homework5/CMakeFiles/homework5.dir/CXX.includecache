@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/travis/build/VladislavTyurin/OTUS-cpp/Homework5/document.h
+shape.h
+/home/travis/build/VladislavTyurin/OTUS-cpp/Homework5/shape.h
+iostream
+-
+
+/home/travis/build/VladislavTyurin/OTUS-cpp/Homework5/main.cpp
+iostream
+-
+vector
+-
+shape.h
+/home/travis/build/VladislavTyurin/OTUS-cpp/Homework5/shape.h
+document.h
+/home/travis/build/VladislavTyurin/OTUS-cpp/Homework5/document.h
+
+/home/travis/build/VladislavTyurin/OTUS-cpp/Homework5/shape.h
+iostream
+-
+
