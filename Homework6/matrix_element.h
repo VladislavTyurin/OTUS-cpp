@@ -8,6 +8,11 @@ public:
 
     MatrixElement() = delete;
 
+    ~MatrixElement()
+    {
+        delete ml;
+    }
+
     MatrixElement(IContainer<T,M,default_value>* _cont,
                   typename generate_tuple_type<T,M>::type* _tup)
             :cont(_cont),tup(_tup){
