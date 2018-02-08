@@ -14,6 +14,7 @@ public:
     virtual ~IContainer(){};
     virtual void AddElement(std::pair<typename generate_tuple_type<int,N>::type,T>) = 0;
     virtual void Print() = 0;
+    virtual size_t Size() = 0;
     virtual void DeleteElement(typename generate_tuple_type<int,N>::type _tup) = 0;
 };
 
