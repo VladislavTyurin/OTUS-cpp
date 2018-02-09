@@ -37,9 +37,18 @@ class MatrixElementContainer:public IContainer<T,N,default_value>
 {
 public:
 
-    void AddElement(std::pair<typename generate_tuple_type<int,N>::type, T> p) override
+    void AddElement(std::pair<typename generate_tuple_type<int,N>::type, T> _p) override
     {
-        v.emplace(p);
+        auto pos = std::find_if(v.begin(),v.end(),[&_p](std::pair<typename generate_tuple_type<int,N>::type, T> p)->bool
+        {
+            return _p.first==p.first;
+        });
+        if(pos==v.end())
+        {
+            v.emplace(p);
+            return;
+        }
+        pos->second = _p.second;
     }
 
     void DeleteElement(typename generate_tuple_type<int,N>::type _tup) override
@@ -75,9 +84,18 @@ class MatrixElementContainer<T,2,default_value>:public IContainer<T,2,default_va
 {
 public:
 
-    void AddElement(std::pair<std::tuple<int,int>, T> p) override
+    void AddElement(std::pair<std::tuple<int,int>, T> _p) override
     {
-        v.emplace(p);
+        auto pos = std::find_if(v.begin(),v.end(),[&_p](std::pair<std::tuple<int,int>, T> p)->bool
+        {
+            return _p.first==p.first;
+        });
+        if(pos==v.end())
+        {
+            v.emplace(p);
+            return;
+        }
+        pos->second = _p.second;
     }
 
     void DeleteElement(std::tuple<int,int> _tup) override
