@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <algorithm>
-#include <set>
+#include <map>
 
 #include "generate_tuple.h"
 #include "tuple_forward.h"
@@ -16,20 +16,7 @@ public:
     virtual void Print() = 0;
     virtual size_t Size() = 0;
     virtual void DeleteElement(typename generate_tuple_type<int,N>::type _tup) = 0;
-};
-
-template<typename T,T default_value>
-class IContainer<T,2,default_value>
-{
-public:
-    virtual ~IContainer(){};
-    virtual void AddElement(std::pair<std::tuple<int,int>,T>) = 0;
-    virtual void Print() = 0;
-    virtual size_t Size() = 0;
-    virtual void DeleteElement(std::tuple<int,int>) = 0;
-    virtual void PrintFragment(int x1, int y1, int x2, int y2) = 0;
-private:
-    virtual T GetValue(int x, int y) = 0;
+    virtual T Value(typename generate_tuple_type<int,N>::type _tup)=0;
 };
 
 template <typename T, int N,T default_value>
@@ -45,7 +32,7 @@ public:
         });
         if(pos==v.end())
         {
-            v.emplace(p);
+            v.emplace(_p);
             return;
         }
         pos->second = _p.second;
@@ -70,64 +57,15 @@ public:
         }
     }
 
-    size_t Size() override
+    T Value(typename generate_tuple_type<int,N>::type _tup) override
     {
-        return v.size();
-    }
-
-private:
-    std::set<std::pair<typename generate_tuple_type<int,N>::type,T>> v;
-};
-
-template <typename T,T default_value>
-class MatrixElementContainer<T,2,default_value>:public IContainer<T,2,default_value>
-{
-public:
-
-    void AddElement(std::pair<std::tuple<int,int>, T> _p) override
-    {
-        auto pos = std::find_if(v.begin(),v.end(),[&_p](std::pair<std::tuple<int,int>, T> p)->bool
-        {
-            return _p.first==p.first;
-        });
-        if(pos==v.end())
-        {
-            v.emplace(p);
-            return;
-        }
-        pos->second = _p.second;
-    }
-
-    void DeleteElement(std::tuple<int,int> _tup) override
-    {
-        auto pos = std::find_if(v.begin(),v.end(),[&_tup](std::pair<std::tuple<int,int>, T> p)->bool
-        {
-            return _tup==p.first;
-        });
+        //auto pos = std::find(v.begin(),v.end(),_tup);
+        auto pos = v.find(_tup);
         if(pos!=v.end())
-            v.erase(pos);
-    }
-
-    void Print() override
-    {
-        for(auto el:v)
         {
-            print_tuple(el.first);
-            std::cout<<el.second<<std::endl;
+            return v[_tup];
         }
-    }
-
-    void PrintFragment(int x1, int y1, int x2, int y2) override
-    {
-        for(int i=x1; i<=x2;++i)
-        {
-            for(int j=y1;j<=y2;++j)
-            {
-                std::cout<<GetValue(i,j);
-                std::cout<<" ";
-            }
-            std::cout<<std::endl;
-        }
+        return default_value;
     }
 
     size_t Size() override
@@ -136,18 +74,5 @@ public:
     }
 
 private:
-
-    T GetValue(int x, int y) override
-    {
-        auto pos = std::find_if(v.begin(),v.end(),[&x,&y](std::pair<std::tuple<int,int>,T> p)->bool
-        {
-            return (std::get<0>(p.first)==x && std::get<1>(p.first)==y);
-        });
-        if(pos==v.end())
-            return default_value;
-        else
-            return pos->second;
-    }
-
-    std::set<std::pair<std::tuple<int,int>,T>> v;
+    std::map<typename generate_tuple_type<int,N>::type,T> v;
 };

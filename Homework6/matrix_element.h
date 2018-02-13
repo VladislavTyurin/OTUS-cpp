@@ -64,7 +64,7 @@ public:
 
     T Value()
     {
-        return value;
+        return cont->Value(*tup);
     }
 
 private:

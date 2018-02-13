@@ -16,7 +16,15 @@ int main()
         matrix[i][9-i]=9-i;
     }
 
-    matrix.PrintFragment(1,1,8,8);
+    for(int i=1;i<=8;++i)
+    {
+        for(int j=1;j<=8;++j)
+        {
+            std::cout<<matrix[i][j]<<" ";
+        }
+        std::cout<<std::endl;
+    }
+
     std::cout<<matrix.Size()<<std::endl;
     matrix.Print();
     return 0;

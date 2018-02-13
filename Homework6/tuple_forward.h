@@ -25,7 +25,7 @@ struct iterate_tuple<0,Args...>
 };
 
 template <typename ...Args>
-void print_tuple(std::tuple<Args...>& t)
+void print_tuple(std::tuple<Args...> t)
 {
     int const t_size = std::tuple_size<std::tuple<Args...>>::value;
 
