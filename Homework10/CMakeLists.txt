@@ -8,7 +8,7 @@ add_executable(bulkmt main.cpp bulk.cpp consolewriter.cpp)
 set_target_properties(bulkmt PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
-        COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+        COMPILE_OPTIONS -Wpedantic -Wall -Wextra -pthread
         )
 
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
