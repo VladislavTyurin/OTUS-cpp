@@ -22,7 +22,8 @@ void FileWriter::Write(std::deque<std::string> bulk,int& block_counter, int& cmd
         }
         file<<bulk[index]<<" ";
         index++;
-        file.seekp(index*2);
+        file.seekp(current+bulk[index].size()+1);
+        current+=bulk[index].size()+1;
         cmd_counter++;
         mtx.unlock();
     }
@@ -39,4 +40,5 @@ void FileWriter::CreateFile()
 {
     file=std::ofstream("bulk"+timestamp+".log");
     index=0;
+    current=0;
 }

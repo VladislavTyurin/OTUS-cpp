@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <ostream>
 #include <thread>
 #include <mutex>
 #include <deque>
@@ -33,4 +34,5 @@ private:
     std::mutex mtx;
     bool done;
     int index=0;
+    int current=0;
 };
