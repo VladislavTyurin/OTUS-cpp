@@ -11,13 +11,14 @@ void ConsoleWriter::Write(std::vector<std::string>& bulk)
 
 void FileWriter::Write(std::vector<std::string>& bulk)
 {
-    std::ofstream out("bulk"+timestamp+".log");
-    for(auto&& element:bulk)
-    {
-        out<<element<<" ";
+    if(bulk.size()) {
+        std::ofstream out("bulk" + timestamp + ".log");
+        for (auto &&element:bulk) {
+            out << element << " ";
+        }
+        out << std::endl;
+        out.close();
     }
-    out<<std::endl;
-    out.close();
 }
 
 void FileWriter::setTimestamp(std::string t)
