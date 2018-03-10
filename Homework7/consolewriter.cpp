@@ -17,6 +17,7 @@ void FileWriter::Write(std::vector<std::string>& bulk)
         out<<element<<" ";
     }
     out<<std::endl;
+    out.close();
 }
 
 void FileWriter::setTimestamp(std::string t)

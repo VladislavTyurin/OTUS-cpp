@@ -2,16 +2,16 @@ language: cpp
 #before_script:
 #- sudo apt-get install graphviz
 #- sudo apt-get install doxygen
-addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-        packages:
-            - g++-7
+#addons:
+#    apt:
+#        sources:
+#            - ubuntu-toolchain-r-test
+#        packages:
+#            - g++-7
 
 script:
-- CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
-- cd Homework10
+#- CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
+- cd Homework7
 - cmake .
 - cmake --build .
 - cmake --build . --target package
@@ -19,7 +19,7 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: curl -T bulkmt-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uVladislavTyurin:$BINTRAY_API_KEY "https://api.bintray.com/content/vladislavtyurin/otus-cpp/bulkmt/$TRAVIS_BUILD_NUMBER/bulkmt-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    script: curl -T bulk-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uVladislavTyurin:$BINTRAY_API_KEY "https://api.bintray.com/content/vladislavtyurin/otus-cpp/bulk/$TRAVIS_BUILD_NUMBER/bulk-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
   
  # - provider: pages
  #   skip-cleanup: true
