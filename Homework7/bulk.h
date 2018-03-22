@@ -6,6 +6,7 @@ public:
     Bulk(int _n):n(_n){};
     void ReadCommands(std::string);
     void WriteCommands();
+    int GetBracketsSize();
 
 private:
     std::vector<std::string> bulk;

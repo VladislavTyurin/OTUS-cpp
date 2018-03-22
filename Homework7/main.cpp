@@ -8,5 +8,8 @@ int main(int argc, char* argv[])
     //std::getline(std::cin,cmd);
     while(std::getline(std::cin,cmd))
         b.ReadCommands(cmd);
-    b.WriteCommands();
+
+    if(b.GetBracketsSize()==0) {
+        b.WriteCommands();
+    }
 }

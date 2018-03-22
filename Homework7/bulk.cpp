@@ -10,7 +10,7 @@ void Bulk::ReadCommands(std::string command)
     if(command=="{")
     {
         brackets.push_back('{');
-        if(brackets.size()==1)
+        if(brackets.size()==1 && bulk.size())
         {
             WriteCommands();
         }
@@ -21,7 +21,7 @@ void Bulk::ReadCommands(std::string command)
         brackets.pop_back();
         if(brackets.size()==0)
         {
-        WriteCommands();
+            WriteCommands();
         }
         return;
     }
@@ -41,4 +41,9 @@ void Bulk::WriteCommands()
     timestamp.clear();
     firstCmd=true;
     bulk.clear();
+}
+
+int Bulk::GetBracketsSize()
+{
+    return brackets.size();
 }
