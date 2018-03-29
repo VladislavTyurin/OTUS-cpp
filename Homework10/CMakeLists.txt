@@ -3,7 +3,7 @@ project(bulkmt VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 configure_file(version.h.in version.h)
 
-add_executable(bulkmt main.cpp bulk.cpp consolewriter.cpp)
+add_executable(bulkmt main.cpp)
 
 set_target_properties(bulkmt PROPERTIES
         CXX_STANDARD 14
