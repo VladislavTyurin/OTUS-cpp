@@ -1,6 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/vladislavtyurin/Desktop/OTUS-cpp/Homework7
-CMake Error at CMakeLists.txt:2 (project):
-  VERSION "0.0." format invalid.
-
-
--- Configuring incomplete, errors occurred!
