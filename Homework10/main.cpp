@@ -208,6 +208,7 @@ public:
 
     void Report()
     {
+        std::cout<<"main: "<<string_counter<<" strings "<<command_counter<<" commands "<<blocks_counter<<" blocks\n";
         for(int i=0;i<=num_threads_;++i)
         {
             std::cout<<tv[i].GetName()<<": "
