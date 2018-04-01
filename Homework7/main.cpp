@@ -2,8 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <map>
-#include <random>
-#include <chrono>
+#include <memory>
 
 class Bulk
 {
@@ -63,6 +62,7 @@ class Writer
 {
 public:
     virtual void Write(Bulk*) = 0;
+    virtual ~Writer(){};
 };
 
 class ConsoleWriter:public Writer
@@ -90,15 +90,13 @@ public:
     StringHandler(int block_size, int num_threads=1):block_size_(block_size)
     {
         b=new Bulk();
-        console_writer = new ConsoleWriter();
-        file_writer = new FileWriter();
+        console_writer.reset( new ConsoleWriter() );
+        file_writer.reset( new FileWriter() );
     }
 
     ~StringHandler()
     {
         delete b;
-        delete console_writer;
-        delete file_writer;
     }
 
     void Run()
@@ -108,6 +106,11 @@ public:
         {
             if(command=="{")
             {
+                if(num_commands)
+                {
+                    DoWrite();
+                    num_commands=0;
+                }
                 ++depth;
                 continue;
             }
@@ -117,9 +120,7 @@ public:
                 --depth;
                 if(depth==0)
                 {
-                    Write(console_writer);
-                    Write(file_writer);
-                    b->Reset();
+                    DoWrite();
                 }
                 continue;
             }
@@ -130,9 +131,7 @@ public:
             {
                 if(++num_commands==block_size_)
                 {
-                    Write(console_writer);
-                    Write(file_writer);
-                    b->Reset();
+                    DoWrite();
                     num_commands=0;
                     continue;
                 }
@@ -146,8 +145,8 @@ public:
         {
             if(num_commands)
             {
-                Write(console_writer);
-                Write(file_writer);
+                Write(console_writer.get());
+                Write(file_writer.get());
             }
         }
     }
@@ -158,8 +157,15 @@ private:
     int num_commands = 0;
 
     Bulk* b;
-    Writer* console_writer;
-    Writer* file_writer;
+    std::unique_ptr<Writer> console_writer;
+    std::unique_ptr<Writer> file_writer;
+
+    void DoWrite()
+    {
+        Write(console_writer.get());
+        Write(file_writer.get());
+        b->Reset();
+    }
 
     void Write(Writer* writer)
     {
