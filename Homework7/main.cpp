@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <map>
+#include <chrono>
 #include <memory>
 
 class Bulk
