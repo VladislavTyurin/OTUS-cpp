@@ -135,6 +135,11 @@ public:
             string_counter++;
             if(command=="{")
             {
+                if(num_commands)
+                {
+                    DoWrite();
+                    num_commands=0;
+                }
                 ++depth;
                 continue;
             }
@@ -144,18 +149,8 @@ public:
                 --depth;
                 if(depth==0)
                 {
-                    {
-                        std::lock_guard<std::mutex> lk(cv_m);
-                        bulk_queue.emplace_back(*b);
-                    }
-                    {
-                        std::lock_guard<std::mutex> lk(log_cv_m);
-                        console_bulk_queue.emplace_back(*b);
-                    }
-                    b->Reset();
+                    DoWrite();
                     blocks_counter++;
-                    cv.notify_one();
-                    log_cv.notify_one();
                 }
                 continue;
             }
@@ -167,18 +162,8 @@ public:
             {
                 if(++num_commands==block_size_)
                 {
-                    {
-                        std::lock_guard<std::mutex> lk(cv_m);
-                        bulk_queue.emplace_back(*b);
-                    }
-                    {
-                        std::lock_guard<std::mutex> lk(log_cv_m);
-                        console_bulk_queue.emplace_back(*b);
-                    }
-                    b->Reset();
+                    DoWrite();
                     num_commands=0;
-                    cv.notify_one();
-                    log_cv.notify_one();
                     blocks_counter++;
                     continue;
                 }
@@ -241,6 +226,22 @@ private:
     Bulk* b;
     std::deque<Bulk> bulk_queue;
     std::deque<Bulk> console_bulk_queue;
+
+
+    void DoWrite()
+    {
+        {
+            std::lock_guard<std::mutex> lk(cv_m);
+            bulk_queue.emplace_back(*b);
+        }
+        {
+            std::lock_guard<std::mutex> lk(log_cv_m);
+            console_bulk_queue.emplace_back(*b);
+        }
+        b->Reset();
+        cv.notify_one();
+        log_cv.notify_one();
+    }
 
     void WriteBulk()
     {
