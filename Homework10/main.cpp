@@ -5,6 +5,7 @@
 #include <condition_variable>
 #include <fstream>
 #include <map>
+#include <random>
 
 class Bulk
 {
@@ -14,7 +15,8 @@ public:
     {
         if(first_command)
         {
-            timestamp = std::to_string(std::time(nullptr));
+            std::uniform_int_distribution<int> dist(0,999);
+            timestamp = std::to_string(std::time(nullptr))+std::to_string(dist(engine));
             first_command = false;
         }
 
@@ -55,9 +57,16 @@ public:
     }
 
 private:
+    std::mt19937 engine;
     std::string timestamp="";
     bool first_command=true;
     std::vector<std::string> commands;
+};
+
+struct Counter
+{
+    int commands=0;
+    int block=0;
 };
 
 class NamedThread
@@ -73,9 +82,11 @@ public:
         return Name;
     }
 
-    void Join()
+    void Join(Counter& c)
     {
         t.join();
+        block+=c.block;
+        commands+=c.commands;
     }
 
     std::thread& GetThread()
@@ -83,17 +94,20 @@ public:
         return t;
     }
 
+    int GetCommands()
+    {
+        return commands;
+    }
+    int GetBlocks()
+    {
+        return block;
+    }
 private:
     std::thread t;
     std::string Name;
-};
-
-struct Counter
-{
     int commands=0;
     int block=0;
 };
-
 
 class StringHandler
 {
@@ -112,7 +126,7 @@ public:
         {
             std::string thread_name = "file"+std::to_string(i+1);
             tv.emplace_back(NamedThread(thread_name,[this](){
-               this->WriteBulk();
+                this->WriteBulk();
             }));
 
         }
@@ -120,10 +134,6 @@ public:
 
     ~StringHandler()
     {
-        for(auto& t :tv)
-        {
-            t.Join();
-        }
         delete b;
     }
 
@@ -193,12 +203,17 @@ public:
 
     void Report()
     {
+        for(auto& t :tv)
+        {
+            t.Join(tm[t.GetThread().get_id()]);
+        }
         std::cout<<"main: "<<string_counter<<" strings "<<command_counter<<" commands "<<blocks_counter<<" blocks\n";
         for(int i=0;i<=num_threads_;++i)
         {
             std::cout<<tv[i].GetName()<<": "
-                     <<tm[tv[i].GetThread().get_id()].block<<" blocks "
-                     <<tm[tv[i].GetThread().get_id()].commands<<" commands"<<std::endl;
+                     <<tv[i].GetBlocks()<<" blocks "
+                     <<tv[i].GetCommands()<<" commands"<<std::endl;
+
         }
 
     };
