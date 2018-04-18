@@ -1,6 +1,7 @@
 #pragma once
 
 #include <deque>
+#include <condition_variable>
 #include "Writer.h"
 
 class NamedThread
