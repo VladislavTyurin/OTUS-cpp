@@ -3,7 +3,7 @@ project(bulkmt VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 configure_file(version.h.in version.h)
 
-add_executable(bulkmt main.cpp)
+add_executable(bulkmt main.cpp Bulk.cpp Bulk.h Writer.h NamedThread.cpp NamedThread.h StringHandler.cpp StringHandler.h ThreadPool.cpp ThreadPool.h)
 
 set_target_properties(bulkmt PROPERTIES
         CXX_STANDARD 14
