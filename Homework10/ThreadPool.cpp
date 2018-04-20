@@ -40,8 +40,11 @@ void ThreadPool::DoWrite()
 
 void ThreadPool::DoWriteRest()
 {
-    while(!bulk_queue.empty())
+    while(!QE)
+    {
         cv.notify_one();
+        QE=GetQE();
+    }
 }
 
 void ThreadPool::Stop()
@@ -63,4 +66,10 @@ void ThreadPool::AddToDeque(const Bulk *b)
 {
     std::lock_guard<std::mutex> lk(cv_m);
     bulk_queue.emplace_back(*b);
+}
+
+bool ThreadPool::GetQE()
+{
+    std::lock_guard<std::mutex> lk(cv_m);
+    return bulk_queue.empty();
 }

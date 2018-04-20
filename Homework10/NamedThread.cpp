@@ -28,7 +28,7 @@ void NamedThread::Handler(Writer* writer, std::condition_variable& cv, std::mute
         lk.unlock();
         block++;
         commands += bulk.Size();
-        writer->Write(&bulk);
+        writer->Write(std::move(bulk));
     }
     else
         lk.unlock();

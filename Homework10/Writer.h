@@ -5,24 +5,24 @@
 class Writer
 {
 public:
-    virtual void Write(Bulk*) = 0;
+    virtual void Write(Bulk&&) = 0;
     virtual ~Writer(){};
 };
 
 class ConsoleWriter:public Writer
 {
 public:
-    void Write(Bulk* b) override
+    void Write(Bulk&& b) override
     {
-        b->ConsoleWrite();
+        b.ConsoleWrite();
     }
 };
 
 class FileWriter:public Writer
 {
 public:
-    void Write(Bulk* b) override
+    void Write(Bulk&& b) override
     {
-        b->WriteFile();
+        b.WriteFile();
     }
 };
