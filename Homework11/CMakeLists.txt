@@ -14,7 +14,7 @@ set_target_properties(async PROPERTIES
         LINK_FLAGS -pthread
         )
 
-
+set(CMAKE_CXX_FLAGS "-std=c++11")
 target_link_libraries(async_cli async)
 
 install(TARGETS async DESTINATION lib)
