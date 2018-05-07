@@ -13,7 +13,7 @@ public:
     void Stop();
 private:
     void Waiting();
-    void ParseData( const char* data );
+    void ParseData( const char* data ,size_t);
     void HandleRest();
     bool GetQE();
     std::shared_ptr<StringHandler> string_handler;

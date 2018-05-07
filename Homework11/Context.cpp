@@ -17,7 +17,7 @@ Context::~Context()
 
 void Context::Receive(const char *data, size_t size)
 { 
-    ParseData( data );
+    ParseData( data, size );
     cv.notify_one();
 }
 
@@ -50,22 +50,23 @@ void Context::Waiting()
     }
 }
 
-void Context::ParseData( const char* data )
+void Context::ParseData( const char* data, size_t len )
 {
     std::string command = data;
     std::string word = "";
-    for( auto it = command.begin(); it != command.end(); ++it )
+    for(int i = 0;i<len;++i)
     {
-        if( *it == '\n' )
+        if(data[i]=='\n')
         {
             std::lock_guard<std::mutex> lk( cv_m );
-            deque_data.emplace_back( word );
+            if(!word.empty())
+                deque_data.emplace_back( word );
             word.clear();
             continue;
         }
-        word += *it;
+        word+=data[i];
     }
-    if( *std::prev( command.end() )!='\n' )
+    if(data[len-1]!='\n' && !word.empty())
         deque_data.emplace_back( word );
 }
 
