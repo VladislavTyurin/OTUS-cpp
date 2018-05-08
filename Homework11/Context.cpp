@@ -52,22 +52,28 @@ void Context::Waiting()
 
 void Context::ParseData( const char* data, size_t len )
 {
-    std::string command = data;
-    std::string word = "";
-    for(int i = 0;i<len;++i)
+    std::string command;
+    std::copy(data,data+len,std::back_inserter(command));
+    std::string word;
+    for(auto&& c:command)
     {
-        if(data[i]=='\n')
-        {
-            std::lock_guard<std::mutex> lk( cv_m );
-            if(!word.empty())
-                deque_data.emplace_back( word );
-            word.clear();
+        if(c!='\n') {
+            word += c;
             continue;
         }
-        word+=data[i];
+        if(word.empty() && previous_word.empty())
+        {
+            deque_data.emplace_back(word);
+            continue;
+        }
+        if(!word.empty()) {
+            deque_data.emplace_back(word);
+            word.clear();
+        }
     }
-    if(data[len-1]!='\n' && !word.empty())
-        deque_data.emplace_back( word );
+    previous_word = word;
+    if(!word.empty())
+        deque_data.emplace_back(word);
 }
 
 void Context::HandleRest()

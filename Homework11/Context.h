@@ -2,6 +2,7 @@
 
 #include "StringHandler.h"
 #include <thread>
+#include <algorithm>
 #include <condition_variable>
 #include <deque>
 
@@ -23,5 +24,6 @@ private:
     std::deque<std::string> deque_data;
     bool done=false;
     bool QE = false;
+    std::string previous_word;
 };
 
